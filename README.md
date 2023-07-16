@@ -17,6 +17,6 @@ The Morse Code Converter is a Python script that converts text messages into Mor
 
 ## Morse Codes
 The Morse code mappings are defined in the script using a dictionary. Each character is assigned its respective Morse code representation. The Morse code dictionary can be found in the script file.
-
+![](screenshots/morse-code.jpg)
 ## Author
 This project is written by **Saher Muhamed** 16/7/2023.
