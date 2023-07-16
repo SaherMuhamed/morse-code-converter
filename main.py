@@ -1,90 +1,19 @@
 import sys
-
-MORSE_CODES = {
-    "A": "•–",
-    "B": "–•••",
-    "C": "–•–•",
-    "D": "–••",
-    "E": "•",
-    "F": "••–•",
-    "G": "––•",
-    "H": "••••",
-    "I": "••",
-    "J": "•–––",
-    "K": "–•–",
-    "L": "•–••",
-    "M": "––",
-    "N": "–•",
-    "O": "–––",
-    "P": "•–•••",
-    "Q": "––•–",
-    "R": "•–•",
-    "S": "•••",
-    "T": "–",
-    "U": "••–",
-    "V": "•••–",
-    "W": "•––",
-    "X": "–••–",
-    "Y": "–•––",
-    "Z": "––••",
-    "0": "–––––",
-    "1": "•––––",
-    "2": "••–––",
-    "3": "•••––",
-    "4": "••••–",
-    "5": "•••••",
-    "6": "–••••",
-    "7": "––•••",
-    "8": "–––••",
-    "9": "––––•",
-    ".": "•–•–•–",
-    ",": "––••––",
-    "?": "••––••",
-    "'": "•–––•",
-    "!": "––••––",
-    "/": "–••–•",
-    "(": "–•––•–",
-    ")": "–•––•–",
-    "&": "•–•••",
-    ":": "–––•••",
-    ";": "–•–•–•",
-    "=": "–•••–",
-    "+": "•–•–•",
-    "-": "–••••–",
-    "_": "••––•–",
-    "\"": "•–••–•",
-    "$": "•••–•–",
-    "@": "•––•–•",
-    " ": "/"
-}
+import json
 
 try:
-    print('''
-           __________                                 
-         .'----------`.                              
-         | .--------. |                             
-         | |########| |       __________              
-         | |########| |      /__________\             
-.--------| `--------' |------|    --=-- |---------.
-|        `----,-.-----'      |o ======  |         | 
-|       ______|_|_______     |__________|         | 
-|      /  %%%%%%%%%%%%  \                         | 
-|     /  %%%%%%%%%%%%%%  \        morse code      | 
-|     ^^^^^^^^^^^^^^^^^^^^        converter       | 
-+-------------------------------------------------+
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-''')
+    with open('morse_codes.json', mode='r', encoding='UTF-8') as f:
+        morse_codes = json.load(f)
 
-    user_input = input("[+] Enter your message: ")
-
+    user_input = input("\n[*] Enter your message: ")
     morse_chars = ""
     for char in user_input.strip():
-        if char.upper() in MORSE_CODES.keys():
-            morse_chars += f" {MORSE_CODES.get(char.upper())}"
-
+        if char.upper() in morse_codes.keys():
+            morse_chars += f" {morse_codes.get(char.upper())}"
     print(f"\n[+] Original Text: {user_input}")
     print(f"[+] Morse Codes: {morse_chars}")
-
+except FileNotFoundError:
+    print("[-] Morse codes file not found.")
 except KeyboardInterrupt:
     print("\n[-] ctrl + c detected, program terminated.")
     sys.exit(0)
